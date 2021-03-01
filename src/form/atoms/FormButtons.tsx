@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction } from 'react'
 import { FormRenderProps } from 'react-final-form'
-import DynamicFormattedMessage from '../../../components/common/ui/DynamicFormattedMessage'
-import Button from '../../../components/common/ui/button/Button'
+import DynamicFormattedMessage from '../../components/common/ui/DynamicFormattedMessage'
+import Button from '../../components/common/ui/button/Button'
 
 interface IFormButtons extends FormRenderProps<any> {
   editState?: [FORM_STATE, Dispatch<SetStateAction<FORM_STATE>>]

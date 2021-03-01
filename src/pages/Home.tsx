@@ -1,5 +1,4 @@
 import React, { FC } from 'react'
-import Counter from '../components/counter/Counter'
 
 export const Home: FC = () => {
   return (
@@ -13,7 +12,6 @@ export const Home: FC = () => {
           </strong>
         </p>
       </div>
-      <Counter />
     </section>
   )
 }

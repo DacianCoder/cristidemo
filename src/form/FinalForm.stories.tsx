@@ -8,10 +8,10 @@ import { Validations } from './validation'
 import {
   integerToLocaleString,
   localeStringToInteger,
-} from '../../utils/number'
+} from '../utils/number'
 import CheckboxField from './atoms/CheckboxField'
 import { Condition } from './atoms/Condition'
-import { SetupWrapper } from '../../SetupWrapper'
+import { SetupWrapper } from '../SetupWrapper'
 import { FormButtons } from './atoms/FormButtons'
 
 export default {

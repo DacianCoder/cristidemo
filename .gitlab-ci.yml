@@ -3,7 +3,6 @@ image: alpine
 stages:
   - build
   - test
-  - mutation-test
 
 cache: &cache
   paths:
@@ -52,20 +51,3 @@ E2E Tests:
     paths:
       - cypress/.results
       - server.log
-
-Test mutations:
-  image: registry.pitechplus.com/frontend/cra-template-pi/node:12
-  tags:
-    - dind
-  stage: mutation-test
-  cache:
-    <<: *cache
-    policy: pull
-  when: manual
-  script:
-    - npm run test:mutation
-  artifacts:
-    paths:
-      - ./reports/mutation/html
-    expire_in: 2 hrs
-    name: ${CI_COMMIT_REF_NAME}

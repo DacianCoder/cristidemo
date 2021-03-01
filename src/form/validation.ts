@@ -1,6 +1,6 @@
 import { FieldValidator } from 'final-form'
-import { integerToLocaleString } from '../../utils/number'
-import { EMAIL_REGEX, MIN_AGE } from '../../constants/form'
+import { integerToLocaleString } from '../utils/number'
+import { EMAIL_REGEX, MIN_AGE } from '../constants/form'
 
 enum FIELD_VALIDATION {
   REQUIRED = 'required',

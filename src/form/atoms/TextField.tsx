@@ -1,9 +1,8 @@
 import React from 'react'
 import { FieldRenderProps } from 'react-final-form'
-import DynamicFormattedMessage from '../../../../components/common/ui/DynamicFormattedMessage'
-import { getValidationErrorMessage } from '../../validation'
+import DynamicFormattedMessage from '../../components/common/ui/DynamicFormattedMessage'
+import { getValidationErrorMessage } from '../validation'
 
-// todo mui solution
 const TextField = ({
   input,
   meta,
@@ -16,6 +15,7 @@ const TextField = ({
 }: FieldRenderProps<string>) => {
   const [errorMessage, errorValues] = getValidationErrorMessage(meta.error)
   const shouldShowError = !!errorMessage && meta.touched
+
   return (
     <div className={`inputGroup ${wrapperClass} `}>
       {showLabel && (

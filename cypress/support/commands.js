@@ -1,5 +1,4 @@
 import '@testing-library/cypress/add-commands'
-import { counterActions } from '../../src/store/reducers/counterReducer'
 
 // ***********************************************
 // This example commands.js shows you how to
@@ -27,10 +26,3 @@ import { counterActions } from '../../src/store/reducers/counterReducer'
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
-Cypress.Commands.add('incrementCounterReducer', (incrementBy = 3) => {
-  cy.window()
-    .its('store')
-    .then(({ dispatch }) => {
-      dispatch(counterActions.incrementBy(incrementBy))
-    })
-})

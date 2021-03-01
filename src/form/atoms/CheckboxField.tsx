@@ -1,13 +1,12 @@
 import React from 'react'
 import { FieldRenderProps } from 'react-final-form'
-import DynamicFormattedMessage from '../../../../components/common/ui/DynamicFormattedMessage'
+import DynamicFormattedMessage from '../../components/common/ui/DynamicFormattedMessage'
 
 interface ICheckboxField extends FieldRenderProps<boolean> {
   type: 'checkbox'
   value: undefined
 }
 
-// todo mui solution
 const CheckboxField: React.FC<ICheckboxField> = ({
   input,
   wrapperClass = '',

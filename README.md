@@ -29,10 +29,6 @@ Due to CRA template limitations (we can change only `scripts` and `dependencies`
 
 Basic Global state management configuration with Recoil.js. Read more [here](https://recoiljs.org/) 
 
-## Redux configuration
-
-The template provides basic Redux configuration using [Redux Toolkit](https://redux-toolkit.js.org/)
-
 ## IMPORTANT: Form Solutions
 
 ### Final Form [project](https://final-form.org/react)
@@ -40,9 +36,6 @@ Basic implementation contains a [FormWrapper](/src/form/final-form/FormWrapper.t
 A TextField, CheckboxField and ConditionField is provided by default
 A set of validators is also provided within the final-form directory
 
-### React Hook Form [project](https://react-hook-form.com/)
-Implementation details can be found [here](src/pages/ReactHookForm.tsx). 
- 
 ## Testing
 
 ### E2E
@@ -79,16 +72,6 @@ the mock folder you will also find a [wrappers](/src/__mocks__/wrappers.tsx) fil
 that contains some helper function to wrap your components with Redux and Intl 
 providers.
 
-### Mutation testing
-Mutation tester provider is [Stryker](https://stryker-mutator.io/)
-Stryker provides a real coverage report of the current tests and offers an insight on where bugs might appear
-
-In order to see this report locally, run `npm run test:mutation`
-This report can pe visualised on each branch pipeline by triggering a manual job and then downloading the artifact with the report on a html format 
-In order to add/remove tests or files from mutation scope, please edit [stryker.conf.js](./stryker.conf.js)
-
-Stryker can be removed by adding `mutation` as an argument to the `./bin/clean_project.sh`
-
 ## Internationalization
 
 Translations is provided using React Intl.  
@@ -105,15 +88,5 @@ The template extends CRA ESLint rules with a custom set, tailored for the reason
 
 Eslint rules are commented for your convenience feel free to tweak or remove them inside `.eslintrc`  
 Import order not configured, a plugin can be found [here](https://www.npmjs.com/package/eslint-plugin-ordered-imports) 
-
-## Open API Tools generator [project](https://github.com/OpenAPITools/openapi-generator)
-The provided template uses fetch, if you wish to modify it, please consult the project, axios/superagent are also suported
- 
-By providing a valid endpoint for `swagger.json` retrieval in the `.env` file the script found at `bin/install_api.sh`
-will generate models and APIs defined in that particular `swagger.json`
-
-### Machine requirements
-- `chmod +x ./bin/install.sh` -> to be able to run it  
-- `docker` -> required in order to abstract the java dependency of the generator
 
 ## Styling [docs](./src/assets/styles/README.md).
