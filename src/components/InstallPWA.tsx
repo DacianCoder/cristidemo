@@ -23,6 +23,7 @@ const InstallPWA = () => {
     evt.preventDefault()
     promptInstall?.prompt()
   }
+
   if (!supportsPWA) {
     return null
   }
