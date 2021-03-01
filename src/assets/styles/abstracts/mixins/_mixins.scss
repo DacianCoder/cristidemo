@@ -1,0 +1,301 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass mixins.
+// -----------------------------------------------------------------------------
+
+/// Event wrapper
+/// @author Harry Roberts
+/// @param {Bool} $self [false] - Whether or not to include current selector
+/// @link https://twitter.com/csswizardry/status/478938530342006784 Original tweet from Harry Roberts
+@mixin on-event($self: false) {
+  @if $self {
+    &,
+    &:hover,
+    &:active,
+    &:focus {
+      @content;
+    }
+  } @else {
+    &:hover,
+    &:active,
+    &:focus {
+      @content;
+    }
+  }
+}
+
+/*
+  added null property so you can get away using only what you need from this mixin
+  ex: good: @include size($width: 100%, $max-widht: 320px);
+  bad: @include size(100px, 200px); works anyhow but it's difficult to maintain
+*/
+@mixin size($height: null, $width: null, $min-width: null, $max-width: null, $min-height: null, $max-height: null) {
+  height: $height;
+  width: $width;
+  min-width: $min-width;
+  max-width: $max-width;
+  min-height: $min-height;
+  max-height: $max-height;
+}
+
+/*
+  added null property so you can get away using only what you need from this mixin
+  ex1: @include font($font-size: 10px, $line-height: 1em);
+  ex2: @include font(10px, red,  center);
+  you can use it without variables but you MUST keep the order
+*/
+
+@mixin font($font-size: null,
+$color: null,
+$text-align: null,
+$line-height: null,
+$font-weight: null,
+$font-family: null,
+$text-indent: null,
+$white-space: null,
+$letter-spacing: null,
+$word-spacing: null,
+$text-transform: null,
+$text-decoration: null,
+$font-style: null) {
+  color: $color;
+  font-family: $font-family;
+  font-size: $font-size;
+  font-style: $font-style;
+  font-weight: $font-weight;
+  line-height: $line-height;
+  letter-spacing: $letter-spacing;
+  text-transform: $text-transform;
+  text-decoration: $text-decoration;
+  text-align: $text-align;
+  text-indent: $text-indent;
+  white-space: $white-space;
+  word-spacing: $word-spacing;
+}
+
+/*
+  mixin for setting the position;
+  if you don't want to set set/right/top/bottom you can use it like:
+  @include position(absolute);
+  .element { @include position(absolute, 10px, 20px, 30px, 40px); }
+  this is if you want to define top, right bottom, left in this exact order
+  .element { @include position(absolute, $top: 10px, left: 20px); }
+  this is if you don't keep the order
+*/
+@mixin position($position: null, $top: null, $right: null, $bottom: null, $left: null) {
+  position: $position;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
+
+/*
+  fallback mixin for any vendor prefix:
+    ex: @include prefix(transform, rotate(42deg), webkit moz ms o);
+  you don't have to include all 4 fallbacks, you have to include at least 1;
+*/
+@mixin prefix($property, $value, $vendors: webkit moz ms o) {
+  @if $vendors {
+    @each $vendor in $vendors {
+      #{"-" + $vendor + "-" + $property}: #{$value};
+    }
+  }
+  #{$property}: #{$value};
+}
+
+/*
+  fallback mixin for any vendor prefix:
+    ex: @include background-prefix(background-image, linear-gradient, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.12), webkit moz ms o);
+  you don't have to include all 4 fallbacks, you have to include at least 1;
+*/
+@mixin background-prefix($property, $value, $color-start, $color-end, $vendors: webkit moz ms o) {
+  @if $vendors {
+    @each $vendor in $vendors {
+      #{$property}: #{'-' + $vendor + '-' + $value + '(' + $color-start + ',' + $color-end + ')'};
+    }
+  }
+  #{$property}: #{$value};
+}
+
+/*
+  added null property so you can get away using only what you need from this mixin
+  ex: good: @include display($display: flex, $justify-content: center, $align-items: center);
+  bad: @include size(100px, 200px); works anyhow but it's difficult to maintain
+*/
+@mixin display-flex (
+  $justify-content: null,
+  $align-items: null,
+  $align-self: null,
+  $flex-direction: null,
+  $flex-wrap: null,
+  $flex-grow: null,
+  $order: null,
+  $inline: false
+) {
+  @if($inline) {
+    display: inline-flex;
+  } @else {
+    display: flex;
+  }
+  justify-content: $justify-content;
+  align-items: $align-items;
+  align-self: $align-self;
+  flex-direction: $flex-direction;
+  flex-wrap: $flex-wrap;
+  flex-grow: $flex-grow;
+  order: $order;
+}
+
+@mixin border($border-width: null, $border-style: null,$border-color:null, $border-radius: null) {
+  border-width: $border-width;
+  border-style: $border-style;
+  border-color: $border-color;
+  border-radius: $border-radius;
+}
+
+// =============================================================================
+// Font Face
+// =============================================================================
+@mixin font-face($font-name, $path, $weight: normal, $style: normal) {
+  @font-face {
+    font-family: quote($font-name);
+    src: url($path + ".woff2") format("woff2");
+    font-weight: $weight;
+    font-style: $style;
+  }
+}
+
+// a map-set function (not included with Sass)
+@function map-set($map, $key, $value) {
+  $new: (
+    $key: $value
+  );
+  @return map-merge($map, $new);
+}
+
+//This mixin generate responsive style based on a map / maps
+//@author Ungur Oana - Madalina / Dascalu Iuliu - Daniel
+//@param {map/maps}
+@mixin generateResponsiveStyle($args...) {
+  //we take a new empty map
+  $new-map: ();
+
+  //we iterate through all maps that are passed as an argument
+  @each $maps in $args {
+
+    //we iterate through a single map and we take the key and the value
+    @each $key, $val in $maps {
+
+      //we check if the key is different than style, because
+      //style is not an breakpoint
+      @if $key != style {
+
+        //here we group all the keys that are repeating themselves
+        @if map-has-key($new-map, $key) {
+
+          //we take the values
+          $inner-map: (map-get($maps, style): map-get($maps, $key));
+
+          //we group the values by keys
+          //this will be like this:
+          // (
+          //    default: (font-size: 10px, color: red),
+          //    md: (font-size: 30px, color: blue),
+          //    lg: (font-size: 50px, color: gray)
+          // )
+          $new-map: map-set($new-map, $key, map-merge($inner-map, map-get($new-map, $key)));
+        }
+        @else {
+
+          //if the keys are not repeating the themselves
+          //then we will create a new key value just for them
+          $inner-map: (map-get($maps, style): map-get($maps, $key));
+          $new-map: map-merge($new-map, ($key: $inner-map));
+        }
+      }
+    }
+  }
+
+  //the final $new-map will be like this:
+  //$new-map: (
+  //  default: (border: none, font-size: 10px, color: red),
+  //  md: (border: 1px solid red, font-size: 30px, color: blue),
+  //  lg: (border: 5px solid blue, font-size: 50px, color: gray),
+  //  xlg: (font-size: 100px)
+  // )
+
+  //we take iterate through the new map
+  //and we take the key and the value
+  @each $key, $val in $new-map {
+
+    //we check if the key is not the default one
+    //if it's the default one we don't need to include
+    //in the a media query
+    @if $key != default {
+
+      //we make use  of the media querys mixin
+      //and we pass the key
+      @include respond-to-min($key) {
+
+        //then we iterate through all the values
+        //and we take the css propertie and value
+        @each $prop, $value in $val {
+
+          //and we just print them
+          #{$prop}: #{$value};
+        }
+      }
+    } @else {
+
+      //same as above but here we just print
+      //the properties and the values for
+      //the default properties
+      @each $prop, $value in $val {
+        #{$prop}: #{$value};
+      }
+    }
+  }
+}
+
+// =============
+// === usage ===
+// =============
+
+//i would recommend to use the naming as following:
+//$className+Property, in order to be more easy to read it
+//when will be used
+//declare the maps as following
+// $titleFontSize: (
+//  style: font-size,
+//  default: 10px,
+//  md: 30px,
+//  lg: 50px,
+//  xlg: 100px
+//);
+
+// $titleColor: (
+//  style: color,
+//  default: red,
+//  md: blue,
+//  lg: gray
+//);
+
+//.title {
+//how to use
+//@include generateResponsiveStyle($titleFontSize, $titleColor);
+//}
+
+// Capitalize string
+// --------------------------------------------------------------------------------
+// @param [string] $string
+// --------------------------------------------------------------------------------
+// @return [string]
+
+@function capitalize($string) {
+  @return to-upper-case(str-slice($string, 1, 1)) + str-slice($string, 2);
+}
+
+@function breakpoint-min($name, $breakpoints: $breakpoints-min) {
+  $min: map-get($breakpoints, $name);
+  @return if($min != 0, $min, null);
+}

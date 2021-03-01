@@ -1,0 +1,12 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 10px;
+}
+
+body {
+  @include font($font-family: $primaryFont, $color: $bodyTextColor);
+  @include generateResponsiveStyle($bodyFontSize);
+}

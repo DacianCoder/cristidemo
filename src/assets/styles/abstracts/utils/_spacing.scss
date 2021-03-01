@@ -1,0 +1,38 @@
+$spacingAbbrev: (
+        margin: m,
+        padding: p
+);
+
+$positionsAbbrev: (
+        top: t,
+        right: r,
+        bottom: b,
+        left: l
+);
+
+@if ($enableSpacingHelperClasses) {
+  @each $media, $breakpoint in $breakpoints-min {
+    @media (min-width: $breakpoint) {
+      $infix: breakpoint-infix($media, $breakpoints-min);
+
+      @each $prop, $abbrev in $spacingAbbrev {
+        @each $key, $value in $spacing {
+          @each $orietationValue, $orietationAbbr in $positionsAbbrev {
+
+            @if $orietationValue != top and $orietationValue != bottom {
+              .#{$abbrev}#{$orietationAbbr}#{$key}#{$infix},
+              .#{$abbrev}x#{$key}#{$infix} {
+                #{$prop}-#{$orietationValue}: $value !important;
+              }
+            } @else {
+              .#{$abbrev}#{$orietationAbbr}#{$key}#{$infix},
+              .#{$abbrev}y#{$key}#{$infix} {
+                #{$prop}-#{$orietationValue}: $value !important;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

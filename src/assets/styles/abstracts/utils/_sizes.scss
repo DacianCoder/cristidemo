@@ -1,0 +1,22 @@
+$sizesAbbrev: (
+        width: w,
+        height: h,
+        max-width: mw,
+        max-height: mh
+);
+
+@if ($enableSizeHelperClasses) {
+  @each $media, $breakpoint in $breakpoints-min {
+    @media (min-width: $breakpoint) {
+      $infix: breakpoint-infix($media, $breakpoints-min);
+
+      @each $prop, $abbrev in $sizesAbbrev {
+        @each $key, $value in $sizes {
+          .#{$abbrev}#{$key}#{$infix} {
+            #{$prop}: $value !important;
+          }
+        }
+      }
+    }
+  }
+}

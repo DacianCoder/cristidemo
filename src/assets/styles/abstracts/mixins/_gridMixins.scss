@@ -1,0 +1,112 @@
+// Minimum breakpoint width. Null for the smallest (first) breakpoint.
+//
+//    >> breakpoint-min(sm, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px))
+//    576px
+@function breakpoint-min($name, $breakpoints: $breakpoints-min) {
+  $min: map-get($breakpoints, $name);
+  @return if($min != 0, $min, null);
+}
+
+// Returns a blank string if smallest breakpoint, otherwise returns the name with a dash infront.
+// Useful for making responsive utilities.
+//
+//    >> breakpoint-infix(xs, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px))
+//    ""  (Returns a blank string)
+//    >> breakpoint-infix(sm, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px))
+//    "-sm"
+@function breakpoint-infix($name, $breakpoints: $breakpoints-min) {
+  @return if(breakpoint-min($name, $breakpoints) == null, "", "#{$name}");
+}
+
+//Make container
+@mixin makeContainer() {
+  width: 100%;
+  padding-right: ($gridGutter / 2);
+  padding-left: ($gridGutter / 2);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+//Make rows
+@mixin makeRow() {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: ($gridGutter / -2);
+  margin-left: ($gridGutter / -2);
+}
+
+@mixin make-col($size, $columns: $breakpoints-min) {
+  flex: 0 0 percentage($size / $columns);
+  // Add a `max-width` to ensure content within each column does not blow out
+  // the width of the column. Applies to IE10+ and Firefox. Chrome and Safari
+  // do not appear to require this.
+  max-width: percentage($size / $columns);
+}
+
+@mixin make-col-offset($size, $columns: $breakpoints-min) {
+  $num: $size / $columns;
+  margin-left: if($num == 0, 0, percentage($num));
+}
+
+@mixin make-grid-columns($columns: $gridColumns, $gutter: $gridGutter, $breakpoints: $breakpoints-min) {
+  // Common properties for all breakpoints
+  %grid-column {
+    position: relative;
+    width: 100%;
+    min-height: 1px; // Prevent columns from collapsing when empty
+    padding-right: ($gutter / 2);
+    padding-left: ($gutter / 2);
+  }
+
+  @each $breakpoint in map-keys($breakpoints) {
+    $infix: capitalize(breakpoint-infix($breakpoint, $breakpoints));
+
+    // Allow columns to stretch full width below their breakpoints
+    @for $i from 1 through $columns {
+      .col#{$infix}#{$i} {
+        @extend %grid-column;
+      }
+    }
+    .col#{$infix},
+    .col#{$infix}Auto {
+      @extend %grid-column;
+    }
+
+    @include respond-to-min($breakpoint) {
+      // Provide basic `.col-{bp}` classes for equal-width flexbox columns
+      .col#{$infix} {
+        flex-basis: 0;
+        flex-grow: 1;
+        max-width: 100%;
+      }
+      .col#{$infix}Auto {
+        flex: 0 0 auto;
+        width: auto;
+        max-width: none; // Reset earlier grid tiers
+      }
+
+      @for $i from 1 through $columns {
+        .col#{$infix}#{$i} {
+          @include make-col($i, $columns);
+        }
+      }
+
+      .order#{$infix}First { order: -1; }
+
+      .order#{$infix}Last { order: $columns + 1; }
+
+      @for $i from 0 through $columns {
+        .order#{$infix}#{$i} { order: $i; }
+      }
+
+      // `$columns - 1` because offsetting by the width of an entire row isn't possible
+      @for $i from 0 through ($columns - 1) {
+        @if not ($infix == "" and $i == 0) { // Avoid emitting useless .offset-0
+          .offset#{$infix}#{$i} {
+            @include make-col-offset($i, $columns);
+          }
+        }
+      }
+    }
+  }
+}

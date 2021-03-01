@@ -1,0 +1,16 @@
+@if $enableGridClasses {
+  .container {
+    @include makeContainer;
+    @include generateResponsiveStyle($containerMaxWidth);
+
+    &Fluid {
+      @include makeContainer;
+    }
+  }
+
+  .row {
+    @include makeRow;
+  }
+
+  @include make-grid-columns();
+}

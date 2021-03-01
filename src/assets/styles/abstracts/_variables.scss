@@ -1,0 +1,155 @@
+//global config
+$enableHelperClassesForColor: true;
+$enableGridClasses: true;
+$enableSizeHelperClasses: true;
+$enableSpacingHelperClasses: true;
+
+//colors
+$defaultColor: #fff;
+$defaultTextColor: #000;
+
+$primaryColor: #41c0bf;
+$secondaryColor: #33404a;
+$primaryColorDark: #767676;
+$primaryColorLight: #cacaca;
+$dangerColor: #ff0000;
+
+$themeColors: (
+        primary: $primaryColor,
+        primaryLight: $primaryColorLight,
+        primaryDark: $primaryColorDark,
+        secondary: $secondaryColor,
+        danger: $dangerColor,
+        default: $defaultColor,
+);
+
+//font
+$primaryFont: "Catamaran", "Arial", sans-serif;
+
+//body
+$bodyTextColor: #333;
+$bodyFontSize: (
+        style: font-size,
+        default: 1.4rem,
+        md: 1.6rem
+);
+$bodyFontFamily: $primaryFont;
+
+/// Font weights map
+$fontWeights: (
+        thin: 100,
+        light: 300,
+        regular: 400,
+        medium: 500,
+        semi-bold: 600,
+        bold: 700,
+) !default;
+
+$fontSizes: (
+        default: 1.6rem,
+        xs: 1.4rem,
+        sm: 1.9rem,
+        md: 2rem,
+        lg: 3rem,
+        xlg: 4rem,
+);
+
+$spacing: (
+        "0": 0,
+        "05": .5rem,
+        "1": 1rem,
+        "15": 1.5rem,
+        "2": 2rem,
+        "25": 2.5rem,
+        "3": 3rem,
+        "35": 3.5rem,
+        "4": 4rem,
+        "45": 4.5rem,
+        "5": 5rem,
+        "Auto": auto
+);
+
+$sizes: (
+        "Full": 100%,
+        "400": 40rem,
+        "FullVh": 100vh,
+        "Auto": auto
+);
+
+$breakpoints-min: (
+        xs: 0,
+        sm: 576px,
+        md: 768px,
+        lg: 992px,
+        xl: 1200px
+) !default;
+
+//grid config
+$gridGutter: 30px;
+$gridColumns: 12;
+
+$containerMaxWidth: (
+        style: max-width,
+        default: 100%,
+        sm: 540px,
+        md: 720px,
+        lg: 920px,
+        xl: 1140px
+);
+
+//Buttons
+$buttonBasePadding: (
+        style: padding,
+        default: 1rem 1.5rem,
+);
+$buttonBaseFontSize: 1.4rem;
+$buttonPrimaryBackground: $primaryColor;
+$buttonPrimaryColor: $secondaryColor;
+$buttonPrimaryBackgroundHover: $secondaryColor;
+$buttonPrimaryColorHover: $primaryColor;
+
+//navbar
+$enableNavbarBoxShadow: true;
+$navbarBoxShadow: 0 .2rem 1.2rem 0 rgba(0, 0, 0, .1);
+$navbarBackground: $defaultColor;
+$navbarPadding: (
+        style: padding,
+        default: 3rem 0
+);
+
+$navbarLinkColor: $secondaryColor;
+$navbarLinkColorHover: $primaryColor;
+$navbarLinkColorActive: $primaryColor;
+
+$navbarItemGutter: 3rem;
+
+$navbarBrandSize: (
+        style: max-width,
+        default: 15rem,
+        lg: 20rem
+);
+
+//inputs
+$inputFontFamily: $primaryFont;
+$inputFontWeight: map-get($fontWeights, semi-bold);
+$inputFontSize: 1.4rem;
+$inputColor: $secondaryColor;
+
+$inputBackground: $defaultColor;
+$inputBorder: .1rem solid $primaryColorLight;
+$inputBorderRadius: .5rem;
+
+$inputPadding: (
+        style: padding,
+        default: .7rem 1.5rem,
+);
+$enableInputSize: true;
+$inputWidth: 100%;
+$inputHeight: 3.6rem;
+
+$inputLabelFontFamily: $primaryFont;
+$inputLabelLineHeight: 1.2;
+$inputLabelFontSize: 1.3rem;
+$inputLabelColor: $secondaryColor;
+$inputLabelFontWeight: map-get($fontWeights, bold);
+$inputLabelMargin: 0 0 .8rem 0;

@@ -1,0 +1,72 @@
+.img-fluid {
+  @include size($max-width: 100%, $height: auto);
+}
+
+.link {
+  cursor: pointer;
+  text-decoration: underline;
+
+  &Default {
+    color: $primaryColorLight;
+  }
+
+  &Unstyled {
+    color: $primaryColorLight;
+    text-decoration: none;
+  }
+}
+
+.d {
+  &Block {
+    display: block;
+  }
+
+  &Flex {
+    display: flex;
+  }
+
+  &Inline {
+    &Flex {
+      display: inline-flex;
+    }
+
+    &Block {
+      display: inline-block;
+    }
+  }
+}
+
+.hidden {
+  display: none !important;
+}
+
+.hidden-sm-up {
+  @include respond-to-min(sm) {
+    display: none !important;
+  }
+}
+
+.hidden-on-mobile {
+  @include respond-to-min(sm) {
+    display: block !important;
+  }
+  display: none !important;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.overflow {
+  &Auto {overflow: auto}
+}
+
+.relative {
+  position: relative;
+}
+
+.border {
+  &BottomDefault {
+    border-bottom: .1rem solid $primaryColorLight;
+  }
+}

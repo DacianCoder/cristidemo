@@ -1,0 +1,43 @@
+.navbar {
+  background: $navbarBackground;
+  @if $enableNavbarBoxShadow {
+    box-shadow: $navbarBoxShadow;
+  }
+  @include generateResponsiveStyle($navbarPadding);
+
+  &Nav, &Items {
+    @include display-flex($align-items: center);
+  }
+
+  &Item {
+    & + & {
+      margin-left: $navbarItemGutter;
+    }
+  }
+
+  &Link {
+    @include font(
+      $font-size: map-get($fontSizes, xs),
+      $font-weight: map-get($fontWeights, semi-bold),
+      $color: $navbarLinkColor,
+      $text-decoration: none
+    );
+    transition: .3s ease;
+
+    @include on-event {
+      color: $navbarLinkColorHover;
+    }
+
+    &Active {
+      color: $navbarLinkColorActive;
+    }
+  }
+
+  &Brand {
+    display: block;
+
+    img {
+      @include generateResponsiveStyle($navbarBrandSize);
+    }
+  }
+}

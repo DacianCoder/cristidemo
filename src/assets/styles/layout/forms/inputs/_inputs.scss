@@ -1,0 +1,24 @@
+.input {
+  &Label {
+    @include font(
+      $font-family: $inputLabelFontFamily,
+      $font-size: $inputLabelFontSize,
+      $line-height: $inputLabelLineHeight,
+      $color: $inputLabelColor,
+      $font-weight: $inputLabelFontWeight
+    );
+    margin: $inputLabelMargin;
+  }
+
+  &Field {
+    @if $enableInputSize {
+      @include size($width: $inputWidth, $height: $inputHeight);
+    }
+    @include font($font-size: $inputFontSize, $color: $inputColor, $font-family: $inputFontFamily, $font-weight: $inputFontWeight);
+    background: $inputBackground;
+    border: $inputBorder;
+    border-radius: $inputBorderRadius;
+    display: block;
+    @include generateResponsiveStyle($inputPadding);
+  }
+}

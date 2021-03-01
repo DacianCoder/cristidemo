@@ -1,0 +1,32 @@
+@if $enableHelperClassesForColor {
+  @each $color, $value in $themeColors {
+    .text#{capitalize($color)} {
+      color: $value !important;
+    }
+    .background#{capitalize($color)} {
+      background-color: $value !important;
+    }
+  }
+}
+
+.text {
+  &Underline {
+    text-decoration: underline;
+
+    &None {
+      text-decoration: none;
+    }
+  }
+
+  &Center {
+    text-align: center;
+  }
+
+  &Right {
+    text-align: right;
+  }
+
+  &Left {
+    text-align: left;
+  }
+}

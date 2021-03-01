@@ -1,0 +1,10 @@
+.error {
+  &Message {
+    color: $dangerColor;
+  }
+
+  &Highlight {
+    border-color: $dangerColor;
+    outline: none;
+  }
+}
