@@ -1,8 +1,13 @@
 .btn {
-  @include font($font-size: $buttonBaseFontSize, $font-weight: map-get($fontWeights, semi-bold), $text-transform: uppercase);
+  @include font(
+    $font-size: $buttonBaseFontSize,
+    $font-weight: map-get($fontWeights, semi-bold),
+    $text-transform: uppercase
+  );
   border: none;
+  border-radius: 1rem;
   cursor: pointer;
-  transition: .3s;
+  transition: 0.3s;
   @include generateResponsiveStyle($buttonBasePadding);
 
   &Primary {

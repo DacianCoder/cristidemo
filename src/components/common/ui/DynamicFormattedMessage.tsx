@@ -25,6 +25,7 @@ type IDynamicFormattedMessage<T> = IBase<T> &
  * @param dynamicProps
  * @constructor
  */
+/* eslint-disable @typescript-eslint/ban-types */
 function DynamicFormattedMessage<P extends object>({
   tag = 'span',
   shouldRender = true,

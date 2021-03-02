@@ -1,7 +1,7 @@
-import { Category, ICategory } from '../constants/todo'
 import React, { FC, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState, useRecoilValue } from 'recoil'
+import { Category, ICategory } from '../constants/todo'
 import { todoListAtom, todoListFilterAtom } from '../recoil/atoms/todoAtoms'
 import { filteredTodoListSelector } from '../recoil/selectors/todoSelectors'
 import DynamicFormattedMessage from '../components/common/ui/DynamicFormattedMessage'
@@ -31,10 +31,9 @@ export const Todo: FC<any> = () => {
             <div className="col12">
               <h1 className="textCenter mb5">Todo List</h1>
             </div>
-            <div className="col12">
-              <h4>Add item</h4>
-            </div>
-            <div className="inputGroup colMd5">
+            <div className="colMd6 offset1 offsetMd0">
+              <h4 className="ml3">Add item</h4>
+            <div className="inputGroup col10">
               <select
                 className="inputField py0"
                 onChange={({ target }) =>
@@ -49,7 +48,11 @@ export const Todo: FC<any> = () => {
                 ))}
               </select>
             </div>
-            <div className="inputGroup colMd5 wFull">
+                          </div>
+
+            <div className="colMd6 offset1 offsetMd0 mt15 mt0sm">
+              <h4 className="ml3">Insert new Todo</h4>
+            <div className="inputGroup col10">
               <input
                 className="inputField"
                 type="text"
@@ -57,18 +60,21 @@ export const Todo: FC<any> = () => {
                 onChange={(event) => setNewTodo(event.target.value)}
               />
             </div>
-            <div className="colMd2">
+                          </div>
+
+            <div className="col mt2 dFlex justifyContentCenter">
               <DynamicFormattedMessage
                 id="form.button.save"
                 shouldRender={!!newTodo}
                 tag={Button}
-                className="btn btnPrimary wFull"
+                className="btn btnPrimary"
                 onClick={addNewTodo}
               />
             </div>
           </div>
+          <hr/>
           <div className="row mt15">
-            <div className="inputGroup colMd6 offset3">
+            <div className="inputGroup colMd6 offsetMd3">
               <h4>Sorting</h4>
               <select
                 className="inputField py0"
@@ -99,12 +105,12 @@ export const Todo: FC<any> = () => {
           </ul>
         </div>
       </div>
-      <div className="colMd2 containerFluid py2">
+      <div className="col dFlex py2 justifyContentCenter">
         <DynamicFormattedMessage
           id="form.button.reset"
           shouldRender={allTodos.length > 0}
           tag={Button}
-          className="btn btnPrimary wFull"
+          className="btn btnDanger"
           onClick={() => setTodos([])}
         />
       </div>

@@ -1,14 +1,21 @@
 {
   "root": true,
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint", "cypress"],
+  "parserOptions": {
+    "project": [
+      "./tsconfig.json"
+    ]
+  },
+  "plugins": [
+    "@typescript-eslint",
+    "cypress"
+  ],
   "extends": [
+    "plugin:@typescript-eslint/recommended",
     "plugin:cypress/recommended",
     "plugin:prettier/recommended",
     "airbnb-typescript",
     "prettier",
-    "prettier/@typescript-eslint",
-    "prettier/react",
     "plugin:import/typescript",
     "plugin:import/errors",
     "plugin:import/warnings"
@@ -18,7 +25,9 @@
   },
   "rules": {
     // Make prettier code formatting suggestions more verbose.
-    "prettier/prettier": ["warn"],
+    "prettier/prettier": [
+      "warn"
+    ],
     // Disable <Fragment> => <> replacement. Feel free to change
     "react/jsx-fragments": "off",
     // Disable prefer default export
@@ -31,7 +40,11 @@
     "react/jsx-boolean-value": "off",
     "jsx-a11y/click-events-have-key-events": "off",
     "jsx-a11y/no-static-element-interactions": "off",
-    "no-restricted-globals": ["error", "event", "fdescribe"],
+    "no-restricted-globals": [
+      "error",
+      "event",
+      "fdescribe"
+    ],
     "react/jsx-props-no-spreading": "off",
     "import/no-extraneous-dependencies": [
       "error",

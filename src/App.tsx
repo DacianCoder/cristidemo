@@ -5,16 +5,14 @@ import { Todo } from './pages/Todo'
 import { Navbar } from './components/Navbar'
 import { Home } from './pages/Home'
 
-const App: React.FC = () => {
-  return (
-    <BrowserRouter>
-      <Navbar />
-      <Switch>
-        <Route path="/" component={Home} exact />
-        <Route path="/todo" component={Todo} />
-      </Switch>
-    </BrowserRouter>
-  )
-}
+const App: React.FC = () => (
+  <BrowserRouter>
+    <Navbar />
+    <Switch>
+      <Route path="/" component={Home} exact />
+      <Route path="/todo" component={Todo} />
+    </Switch>
+  </BrowserRouter>
+)
 
 export default App

@@ -23,12 +23,14 @@ export const storeLocally = (key: string, value: any) => {
  * @param typeCast
  * @param defaultValue
  */
+/* eslint-disable @typescript-eslint/ban-types */
 export const getLocalStorageData = <T = {}>(
   slice: string,
   defaultValue: T | {} = {},
   typeCast = 'object'
 ) => {
   try {
+    /* eslint-disable @typescript-eslint/no-extra-non-null-assertion */
     const value = JSON.parse(localStorage.getItem(slice)!!)
     // eslint-disable-next-line valid-typeof
     if (value != null && typeof value === typeCast) {
