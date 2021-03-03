@@ -3,7 +3,8 @@
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "project": [
-      "./tsconfig.json"
+      "./tsconfig.json",
+      "./cypress/tsconfig.json"
     ]
   },
   "plugins": [
@@ -30,6 +31,7 @@
     ],
     // Disable <Fragment> => <> replacement. Feel free to change
     "react/jsx-fragments": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
     // Disable prefer default export
     "import/prefer-default-export": "off",
     "@typescript-eslint/no-use-before-define": "off",

@@ -6,3 +6,4 @@ public
 # don't lint nyc coverage output
 coverage
 bin
+src/service-worker.ts

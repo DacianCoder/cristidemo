@@ -2,7 +2,7 @@ import { FieldValidator } from 'final-form'
 import { integerToLocaleString } from '../utils/number'
 import { EMAIL_REGEX, MIN_AGE } from '../constants/form'
 
-enum FIELD_VALIDATION {
+enum FieldValidation {
   REQUIRED = 'required',
   NUMBER = 'number',
   MIN = 'minLength',
@@ -46,26 +46,25 @@ export class Validations {
   static composeValidators<T>(
     ...validators: FieldValidator<T>[]
   ): FieldValidator<T> {
-    return (...validatorProps) => {
-      return validators.reduce(
+    return (...validatorProps) =>
+      validators.reduce(
         (error, validator) => error || validator(...validatorProps),
         undefined
       )
-    }
   }
 
   static required: FieldValidator<any> = (value: any) =>
-    value != null ? undefined : FIELD_VALIDATION.REQUIRED
+    value != null ? undefined : FieldValidation.REQUIRED
 
   static mustBeNumber: FieldValidator<any> = (value) =>
-    isNaN(value) ? FIELD_VALIDATION.NUMBER : undefined
+    isNaN(value) ? FieldValidation.NUMBER : undefined
 
   static minValue: (min: number) => FieldValidator<number> = (min) => (
     value
   ) => {
     if (!(isNaN(Number(value)) || value >= min))
       return {
-        type: FIELD_VALIDATION.GREATER_THAN,
+        type: FieldValidation.GREATER_THAN,
         values: [integerToLocaleString(min)],
       }
   }
@@ -77,7 +76,7 @@ export class Validations {
     value = ''
   ) => {
     if ((!skipNull && !value) || !RegExp(regex).test(value)) {
-      return FIELD_VALIDATION.FORMAT
+      return FieldValidation.FORMAT
     }
   }
 
@@ -85,13 +84,13 @@ export class Validations {
     startField
   ) => (endField, values: any) => {
     if (!endField) {
-      return FIELD_VALIDATION.REQUIRED
+      return FieldValidation.REQUIRED
     }
     if (!values[startField]) {
-      return FIELD_VALIDATION.FIRST_VALUE
+      return FieldValidation.FIRST_VALUE
     }
-    if (values[startField]?.value >= endField!!) {
-      return FIELD_VALIDATION.GREATER_THAN
+    if (values[startField]?.value >= endField!) {
+      return FieldValidation.GREATER_THAN
     }
   }
 
@@ -99,7 +98,7 @@ export class Validations {
     value
   ) => {
     if (!value || value.trim().length < min) {
-      return FIELD_VALIDATION.MIN
+      return FieldValidation.MIN
     }
   }
 

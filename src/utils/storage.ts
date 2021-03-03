@@ -2,7 +2,7 @@
  * Removes date stored at {@param slice}
  * @param slice
  */
-export const removeLocalItem = (slice: string) => {
+export const removeLocalItem = (slice: string): void => {
   localStorage.removeItem(slice)
 }
 
@@ -11,7 +11,7 @@ export const removeLocalItem = (slice: string) => {
  * @param key
  * @param value
  */
-export const storeLocally = (key: string, value: any) => {
+export const storeLocally = (key: string, value: any): void => {
   localStorage.setItem(key, JSON.stringify(value))
 }
 

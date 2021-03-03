@@ -30,11 +30,9 @@ export function FormWrapper<FormValues>({
 }: IFormConfig<FormValues>) {
   return (
     <Form subscription={{ submitting: true, pristine: true }} {...rest}>
-      {(formProps) => {
-        return (
-          <form onSubmit={formProps.handleSubmit}>{children(formProps)}</form>
-        )
-      }}
+      {(formProps) => (
+        <form onSubmit={formProps.handleSubmit}>{children(formProps)}</form>
+      )}
     </Form>
   )
 }

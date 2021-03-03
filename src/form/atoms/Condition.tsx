@@ -19,10 +19,8 @@ export const Condition: React.FC<IConditionalField> = ({
   when,
   is,
   children,
-}) => {
-  return (
-    <Field name={when} subscription={{ value: true }}>
-      {({ input: { value } }) => (value === is ? children : null)}
-    </Field>
-  )
-}
+}) => (
+  <Field name={when} subscription={{ value: true }}>
+    {({ input: { value } }) => (value === is ? children : null)}
+  </Field>
+)

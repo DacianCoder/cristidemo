@@ -4,12 +4,12 @@ import DynamicFormattedMessage from '../../components/common/ui/DynamicFormatted
 import Button from '../../components/common/ui/button/Button'
 
 interface IFormButtons extends FormRenderProps<any> {
-  editState?: [FORM_STATE, Dispatch<SetStateAction<FORM_STATE>>]
+  editState?: [FormState, Dispatch<SetStateAction<FormState>>]
   disabled?: boolean
   canEdit?: boolean
 }
 
-enum FORM_STATE {
+enum FormState {
   ADD = 0,
   VIEW = 1,
   EDIT = 2,
@@ -32,23 +32,23 @@ export const FormButtons = ({
   submitting,
   pristine,
   disabled = submitting,
-  editState = [FORM_STATE.ADD, () => null],
+  editState = [FormState.ADD, () => null],
   canEdit = true,
 }: IFormButtons) => {
   const [formState, setFormState] = editState
 
-  if (formState === FORM_STATE.VIEW && canEdit) {
+  if (formState === FormState.VIEW && canEdit) {
     return (
       <DynamicFormattedMessage
         tag={Button}
         id="form.button.edit"
-        onClick={() => setFormState(FORM_STATE.EDIT)}
+        onClick={() => setFormState(FormState.EDIT)}
         disabled={disabled}
       />
     )
   }
 
-  if (formState === FORM_STATE.EDIT || formState === FORM_STATE.ADD) {
+  if (formState === FormState.EDIT || formState === FormState.ADD) {
     return (
       <>
         <DynamicFormattedMessage
@@ -64,9 +64,9 @@ export const FormButtons = ({
           onClick={() => {
             // @ts-ignore restart missing in exposed types for the moment
             form.restart()
-            if (formState === FORM_STATE.EDIT) setFormState(FORM_STATE.VIEW)
+            if (formState === FormState.EDIT) setFormState(FormState.VIEW)
           }}
-          disabled={formState !== FORM_STATE.EDIT && (disabled || pristine)}
+          disabled={formState !== FormState.EDIT && (disabled || pristine)}
           className="btn btnDanger ml3"
         />
       </>

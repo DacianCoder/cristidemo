@@ -7,5 +7,4 @@ describe('HomePage', () => {
   it('will always pass', () => {
     cy.get('body').should('exist')
   })
-
 })

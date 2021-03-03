@@ -14,6 +14,5 @@ export const integerToLocaleString = (number: number | string) => {
  *
  * @param maybeNumber
  */
-export const localeStringToInteger = (maybeNumber: string) => {
-  return Number(maybeNumber?.replace(/\D/g, ''))
-}
+export const localeStringToInteger = (maybeNumber: string) =>
+  Number(maybeNumber?.replace(/\D/g, ''))

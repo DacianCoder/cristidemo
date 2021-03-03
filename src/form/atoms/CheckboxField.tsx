@@ -13,30 +13,25 @@ const CheckboxField: React.FC<ICheckboxField> = ({
   meta,
   label = input.name,
   ...rest
-}) => {
-  return (
-    <div className={wrapperClass}>
-      <label
-        htmlFor={`${label}id`}
-        className="inputLabel dFlex alignItemsCenter"
-      >
-        <div className="checkbox-content">
-          <input
-            {...input}
-            {...rest}
-            className="checkbox-input"
-            id={`${label}id`}
-          />
-        </div>
-        <DynamicFormattedMessage tag="span" id={`form.field.${label}.label`} />
-      </label>
-      <DynamicFormattedMessage
-        tag="span"
-        id={`form.validation.${meta.error}`}
-        shouldRender={!!meta.error && meta.touched}
-      />
-    </div>
-  )
-}
+}) => (
+  <div className={wrapperClass}>
+    <label htmlFor={`${label}id`} className="inputLabel dFlex alignItemsCenter">
+      <div className="checkbox-content">
+        <input
+          {...input}
+          {...rest}
+          className="checkbox-input"
+          id={`${label}id`}
+        />
+      </div>
+      <DynamicFormattedMessage tag="span" id={`form.field.${label}.label`} />
+    </label>
+    <DynamicFormattedMessage
+      tag="span"
+      id={`form.validation.${meta.error}`}
+      shouldRender={!!meta.error && meta.touched}
+    />
+  </div>
+)
 
 export default CheckboxField

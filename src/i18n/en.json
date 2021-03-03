@@ -1,14 +1,9 @@
 {
-  "home": "Home",
-  "work": "Work",
-  "others": "Others",
-  "all": "All",
-  "todo": "Todo list",
-  "about": "About",
-  "finalForm": "Final Form",
-  "increment": "Increment",
-  "decrement": "Decrement",
-  "incrementBy": "Increment by {no}",
+  "label.signup.google": "Sign Up",
+  "adminHome": "Admin Home",
+  "label.signout": "Sign Out",
+  "logo": "LOGO TBD",
+  "toast.generic.error": "You do not have access to this page",
   "form.button.save": "Save",
   "form.button.reset": "Reset",
   "form.button.edit": "Edit",
@@ -30,7 +25,5 @@
   "form.validation.number": "Invalid number",
   "form.validation.maxLength": "Too long",
   "form.validation.minLength": "Too short",
-  "form.validation.email": "Please enter a valid email",
-  "reactHookForm": "React Hook Form",
-  "reactHookFormExample": "A React Hook From example"
+  "form.validation.email": "Please enter a valid email"
 }
