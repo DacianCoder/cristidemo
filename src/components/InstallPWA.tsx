@@ -26,7 +26,7 @@ const InstallPWA = () => {
     <DynamicFormattedMessage
       className="btn btnPrimary mt5"
       onClick={onClick}
-      id="installApp"
+      id="install"
       tag={Button}
     />
   )

@@ -4,9 +4,9 @@ import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
 
 import { auth, fireDB, generateUserDocument } from '../api/firebase'
-import { LOGGED_IN_COOKIE, RealtimeDB } from '../constants'
+import { RealtimeDB } from '../constants'
 import { loggedInUserAtom } from '../recoil/atoms/generalAtoms'
-import { storeLocally } from '../utils/storage'
+import { storageUtils } from '../utils/storage'
 
 export const useAuthListener = () => {
   const { formatMessage } = useIntl()
@@ -37,7 +37,10 @@ export const useAuthListener = () => {
 
           const user = await generateUserDocument(userAuth)
           setLoggedInUser({ ...user, ...validUser })
-          storeLocally(LOGGED_IN_COOKIE, user?.uid && { id: user?.uid })
+          storageUtils.setLocalStorageValue(
+            'loggedInCookie',
+            user?.uid && { id: user?.uid }
+          )
         })
     })
   }, [])

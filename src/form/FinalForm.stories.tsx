@@ -50,7 +50,7 @@ const Example: FC = () => {
               isMandatory={true}
               validate={Validations.composeValidators(
                 Validations.required,
-                Validations.minValue(1213)
+                Validations.minOrEqualValue(1213)
               )}
               parse={(v) => localeStringToInteger(v)}
               format={(v) => integerToLocaleString(v)}

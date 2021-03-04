@@ -1,37 +1,32 @@
-/**
- * Removes date stored at {@param slice}
- * @param slice
- */
-export const removeLocalItem = (slice: string): void => {
-  localStorage.removeItem(slice)
+export const storageKeys = {
+  loggedInCookie: 'loggedInCookie' as const,
+} as const
+
+interface ILocalStorage {
+  [storageKeys.loggedInCookie]: string | null
 }
 
-/**
- * Stores a given value at particular key location
- * @param key
- * @param value
- */
-export const storeLocally = (key: string, value: any): void => {
-  localStorage.setItem(key, JSON.stringify(value))
+const defaultValues: ILocalStorage = {
+  loggedInCookie: null,
 }
 
+type LocalStorageKey = typeof storageKeys[keyof typeof storageKeys]
+
 /**
- * Parses a given local storage slice and checks the type of the value
- * else it returns the default value
+ * Retrieves value stored locally for {@param key} or returns default value
  *
- * @param slice
- * @param typeCast
+ * @param key
  * @param defaultValue
+ * @param typeCast
  */
-/* eslint-disable @typescript-eslint/ban-types */
-export const getLocalStorageData = <T = {}>(
-  slice: string,
-  defaultValue: T | {} = {},
-  typeCast = 'object'
-) => {
+const getLocalStorageValue = <K extends LocalStorageKey, T = ILocalStorage[K]>(
+  key: K,
+  defaultValue: T = (defaultValues[key] as unknown) as T,
+  typeCast = 'string'
+): T => {
   try {
-    /* eslint-disable @typescript-eslint/no-extra-non-null-assertion */
-    const value = JSON.parse(localStorage.getItem(slice)!!)
+    const item = localStorage.getItem(key)
+    const value = typeCast === 'string' ? item : JSON.parse(item || '')
     // eslint-disable-next-line valid-typeof
     if (value != null && typeof value === typeCast) {
       return value as T
@@ -39,5 +34,40 @@ export const getLocalStorageData = <T = {}>(
   } catch (e) {
     // do nothing
   }
-  return defaultValue as T
+
+  return defaultValue
 }
+
+/**
+ * Updates value for {@param key} on local storage
+ * @param key
+ * @param value
+ */
+const setLocalStorageValue = <
+  K extends LocalStorageKey,
+  T = typeof defaultValues[K]
+>(
+  key: K,
+  value: T
+): void => {
+  localStorage.setItem(
+    key,
+    typeof value === 'string' ? value : JSON.stringify(value)
+  )
+}
+
+/**
+ * Removes provided key from storage
+ * @param key
+ */
+const removeLocalStorageValue = <K extends LocalStorageKey>(key: K): void => {
+  localStorage.removeItem(key)
+}
+
+const storageUtils = {
+  removeLocalStorageValue,
+  getLocalStorageValue,
+  setLocalStorageValue,
+}
+
+export { storageUtils }

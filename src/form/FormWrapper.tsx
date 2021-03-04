@@ -1,11 +1,14 @@
-import React, { ReactElement } from 'react'
+import React, { ReactNode } from 'react'
 import { Form, FormProps, FormRenderProps } from 'react-final-form'
 
 /**
  * Extends Final form props in order to be able to use them as FormWrapper Props
  */
-export interface IFormConfig<FormValues> extends FormProps<FormValues> {
-  children: (props: FormRenderProps<FormValues>) => ReactElement
+export interface IFormConfig<
+  FormValues,
+  Children = (props: FormRenderProps<FormValues>) => ReactNode
+> extends FormProps<FormValues> {
+  children: Children
 }
 
 /**

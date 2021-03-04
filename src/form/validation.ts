@@ -8,7 +8,7 @@ enum FieldValidation {
   MIN = 'minLength',
   MAX = 'maxLength',
   FIRST_VALUE = 'firstValue',
-  GREATER_THAN = 'greaterThan',
+  GREATER_THAN = 'greaterThanOrEqual',
   FORMAT = 'format',
 }
 
@@ -59,7 +59,7 @@ export class Validations {
   static mustBeNumber: FieldValidator<any> = (value) =>
     isNaN(value) ? FieldValidation.NUMBER : undefined
 
-  static minValue: (min: number) => FieldValidator<number> = (min) => (
+  static minOrEqualValue: (min: number) => FieldValidator<number> = (min) => (
     value
   ) => {
     if (!(isNaN(Number(value)) || value >= min))
@@ -70,8 +70,8 @@ export class Validations {
   }
 
   static matches: (
-    regex: string,
-    skipNull: boolean
+    regex?: string,
+    skipNull?: boolean
   ) => FieldValidator<string> = (regex = EMAIL_REGEX, skipNull = false) => (
     value = ''
   ) => {
@@ -102,11 +102,12 @@ export class Validations {
     }
   }
 
-  static minimumAge: (min: number) => FieldValidator<number> = (
+  static minimumAge: (min?: number) => FieldValidator<number> = (
     minAge = MIN_AGE
   ) =>
     Validations.composeValidators(
       Validations.required,
-      Validations.minValue(minAge)
+      Validations.mustBeNumber,
+      Validations.minOrEqualValue(minAge)
     )
 }

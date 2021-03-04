@@ -31,12 +31,14 @@
     ],
     // Disable <Fragment> => <> replacement. Feel free to change
     "react/jsx-fragments": "off",
+    "@typescript-eslint/no-unused-vars": "warn",
+    "react/prop-types": "warn",
+    "arrow-body-style": "warn",
     "@typescript-eslint/ban-ts-comment": "off",
     // Disable prefer default export
     "import/prefer-default-export": "off",
     "@typescript-eslint/no-use-before-define": "off",
     "react/require-default-props": "off",
-    "react/prop-types": "off",
     "react/button-has-type": "off",
     "consistent-return": "off",
     "react/jsx-boolean-value": "off",

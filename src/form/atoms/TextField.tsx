@@ -12,7 +12,7 @@ const TextField = ({
   label = input.name,
   isMandatory = false,
   ...rest
-}: FieldRenderProps<string>) => {
+}: FieldRenderProps<string | number>) => {
   const [errorMessage, errorValues] = getValidationErrorMessage(meta.error)
   const shouldShowError = !!errorMessage && meta.touched
 

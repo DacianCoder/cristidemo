@@ -2,7 +2,9 @@
  * Returns the number formatted for the browser's current language
  * @param number
  */
-export const integerToLocaleString = (number: number | string) => {
+export const integerToLocaleString = (
+  number: number | string
+): string | null => {
   const locale = navigator.language || (navigator as any).userLanguage
   const castedValue = Number(number)
 
@@ -14,5 +16,5 @@ export const integerToLocaleString = (number: number | string) => {
  *
  * @param maybeNumber
  */
-export const localeStringToInteger = (maybeNumber: string) =>
+export const localeStringToInteger = (maybeNumber: string): number =>
   Number(maybeNumber?.replace(/\D/g, ''))

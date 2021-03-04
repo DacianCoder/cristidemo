@@ -6,7 +6,7 @@ import DynamicFormattedMessage from './common/ui/DynamicFormattedMessage'
 import { loggedInUserAtom } from '../recoil/atoms/generalAtoms'
 import { ROUTES } from '../api/constants'
 import { auth } from '../api/firebase'
-import { LOGGED_IN_COOKIE } from '../constants'
+import { storageUtils } from '../utils/storage'
 
 export const Navbar: React.FC = () => {
   const [loggedUser, setLoggedUser] = useRecoilState(loggedInUserAtom)
@@ -46,7 +46,7 @@ export const Navbar: React.FC = () => {
                 tag={NavLink}
                 onClick={() => {
                   auth.signOut().then(() => {
-                    localStorage.removeItem(LOGGED_IN_COOKIE)
+                    storageUtils.removeLocalStorageValue('loggedInCookie')
                     setLoggedUser(null)
                   })
                 }}
